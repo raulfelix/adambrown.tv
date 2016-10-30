@@ -1,0 +1,171 @@
+.modal {
+  background-color: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0; 
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 100001;
+
+  .modal-wrap {
+    display: table;
+    width: 100%;
+    height: 100%;
+  }
+
+  .modal-instabinge-slider{
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .modal-action {
+    background-color: transparent;
+    color: #ffffff;
+    display: block;
+    font-size: 24px;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .modal-view {
+    height: 100%;
+    width: 100%;
+  }
+
+  .modal-next,
+  .modal-next:active,
+  .modal-next:focus,
+  .modal-next,
+  .modal-prev,
+  .modal-prev:active,
+  .modal-prev:focus {
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .modal-next,
+  .modal-prev {
+    left: 30px;
+    cursor: pointer;
+    display: block;
+    background: url('../../images/flexslider/direction_nav.png') no-repeat 0 0;
+    margin-top: -16px;
+    position: absolute;
+    top: 50%;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+  }
+  .modal-next {
+    left: auto;
+    right: 30px;
+    background: url('../../images/flexslider/direction_nav.png') no-repeat 0 0;
+    background-position: -30px 0;
+  }
+}
+
+
+@media all and (min-width:680px) {
+  .royalSlider,
+  .rsOverflow,
+  .modal-view-image {
+    height: 576px !important;
+  }
+}
+
+
+
+.modal-instabinge {
+  .modal-view-image {
+    width: 60%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    video,
+    img {
+      width: 100%;
+    }
+  }
+
+  .modal-view-details {
+    background-color: #ededed;
+    left: 60%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+
+    p {
+      font-size: 16px;
+      line-height: 1.3;
+      margin-top: 16px;
+    }
+  }
+
+  .instabinge-pod-wrap {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px rgba(0,0,0,0.4);
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0;
+  }
+}
+
+.inst-wrap {
+  padding: 40px 20px 20px 20px;
+}
+
+
+@media all and (max-width:680px) {
+  .modal .modal-action {
+    right: 10px;
+    top: 10px;
+  }
+
+  .modal .modal-next,
+  .modal .modal-prev {
+    display: none;
+  }
+
+  .modal-instabinge {
+    .instabinge-pod-wrap {
+      background-color: #ededed;
+      position: absolute;
+      top: 60px;
+      bottom: 40px;
+      left: 20px;
+      right: 20px;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .modal-view-image {
+      display: block;
+      width: 100%;
+      height: auto !important;
+    }
+
+    .modal-view-details {
+      left: 0;
+      position: relative;
+      overflow: auto;
+      .inst-wrap {
+        padding: 10px;
+      }
+    }
+  }
+
+}

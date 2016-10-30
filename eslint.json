@@ -1,0 +1,29 @@
+{
+  "extends": "eslint:recommended",
+  "rules": {
+    "eqeqeq": "warn",
+    "no-console": "off",
+
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    "no-trailing-spaces": "warn",
+    "react/jsx-uses-vars": [2]
+  },
+  "globals": {
+    "$": false
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "react"
+  ]
+}
