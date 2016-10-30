@@ -18,7 +18,7 @@
 }
 
 #pageHead {
-  padding: 0 0 30px 0;
+  padding: 0 0 30px 20px;
   margin: 0 auto 30px auto;
   max-width: 992px;
 }
@@ -110,7 +110,7 @@
 
 @media (max-width: 680px) {
   .blog-grid {
-      .inst-post {
+    .inst-post {
       flex-basis: 50%;
       max-width: 50%;
     }
@@ -137,6 +137,7 @@
   width: 13px;
   background-size: 100%;
   margin-right: 6px;
+  position: relative;
 }
 
 .loader-icon {
