@@ -31,7 +31,8 @@ export class Modal extends React.Component {
       controlNavigation: 'none'
     }).data('royalSlider');
 
-    this.slider.ev.on('rsAfterSlideChange', () => {
+    this.slider.ev.on('rsBeforeAnimStart', () => {
+      console.log('rsBeforeAnimStart');
       if (this.posts.length - 1 === this.slider.currSlideId) {
         console.log(this.isFinished);
         if (!this.isFinished && !this.isLoading) {
@@ -44,6 +45,21 @@ export class Modal extends React.Component {
           });
         }
       }
+    });
+
+    this.slider.ev.on('rsAfterSlideChange', () => {
+      // if (this.posts.length - 1 === this.slider.currSlideId) {
+      //   console.log(this.isFinished);
+      //   if (!this.isFinished && !this.isLoading) {
+      //     this.isLoading = true;
+      //     this.props.onFetch((posts, isFinished) => {
+      //       this.add(posts);
+      //       this.posts = this.posts.concat(posts);
+      //       this.isFinished = isFinished;
+      //       this.isLoading = false;
+      //     });
+      //   }
+      // }
     });
   }
 
