@@ -13,6 +13,7 @@ export class Modal extends React.Component {
       height = 600;
     }
     this.isFinished = props.isFinished;
+    this.isLoading = false;
     this.posts = props.posts;
     this.state = {
       height: height
@@ -33,11 +34,13 @@ export class Modal extends React.Component {
     this.slider.ev.on('rsAfterSlideChange', () => {
       if (this.posts.length - 1 === this.slider.currSlideId) {
         console.log(this.isFinished);
-        if (!this.isFinished) {
+        if (!this.isFinished && !this.isLoading) {
+          this.isLoading = true;
           this.props.onFetch((posts, isFinished) => {
             this.add(posts);
             this.posts = this.posts.concat(posts);
             this.isFinished = isFinished;
+            this.isLoading = false;
           });
         }
       }
