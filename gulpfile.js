@@ -7,7 +7,8 @@ var
   eslint = require('gulp-eslint'),
   del = require('del'),
   webpack = require('webpack-stream'),
-  webpackConfig = require('./webpack.config.js');
+  webpackConfig = require('./webpack.config.js'),
+  webpackConfigProd = require('./webpack.config.prod.js');
 
 
 // cleaning tasks
@@ -45,6 +46,13 @@ gulp.task('js:dev', ['clean:js', 'lint'], function(callback) {
     .pipe(livereload());
 });
 
+gulp.task('js:prod', ['clean:js', 'lint'], function(callback) {
+  return gulp.src('src/entry.js')
+    .pipe(webpack(webpackConfigProd))
+    .pipe(gulp.dest(paths.compiled + '/js'))
+    .pipe(livereload());
+});
+
 
 // watch dev task
 gulp.task('watch', ['build'], function() {
@@ -71,3 +79,4 @@ gulp.task('lint', function() {
 });
 
 gulp.task('build', ['lint', 'sass', 'js:dev']);
+gulp.task('prod', ['lint', 'sass', 'js:prod']);

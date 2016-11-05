@@ -42,7 +42,9 @@ export class BlogGrid extends React.Component {
       modalNode = <Modal
         posts={this.state.posts}
         index={this.state.index}
-        onClose={this.onModalClose.bind(this)} />
+        isFinished={this.state.isFinished}
+        onClose={this.onModalClose.bind(this)}
+        onFetch={this.onFetchFromModal.bind(this)} />
     }
 
     if (this.state.posts.length > 0) {
@@ -65,22 +67,36 @@ export class BlogGrid extends React.Component {
     );
   }
   
-  fetch(nextUrl) {
+  fetch(nextUrl, callback) {
     var params = {
       action: 'do_ajax',
       fn: 'instabinge',
       nextUrl: nextUrl
     };
 
-    console.log('fetch', nextUrl);
     jQuery.getJSON(AjaxData.url, params)
-      .done(this.onSuccess)
-      .fail(this.onFail);
+      .done((response) => {
+        var posts = this.state.posts.concat(response.data);
+
+        this.setState({
+          posts: posts,
+          nextUrl: response.pagination.next_url,
+          isLoading: false,
+          isFinished: response.pagination.next_url === undefined
+        }, () => {
+          if (callback) {
+            callback(response.data, this.state.isFinished);
+          }  
+        });
+
+      });
   }
-  
+
+  onFetchFromModal(callback) {
+    this.fetch(this.state.nextUrl, callback);
+  }
+
   onSuccess(response) {
-    console.log(response);
-    // change thumbnail size to 320 instead of default 150
     this.setState({
       posts: this.state.posts.concat(response.data),
       nextUrl: response.pagination.next_url,
@@ -89,12 +105,7 @@ export class BlogGrid extends React.Component {
     });
   }
 
-  onFail() {
-    
-  }
-
   showModal(post, idx) {
-    console.log(post,idx);
     this.setState({
       isModalActive: true,
       index: idx
@@ -108,31 +119,11 @@ export class BlogGrid extends React.Component {
   }
 
   loadMore() {
-    var count = 0;
-
     // load from memory
     this.setState({
       isLoading: true
     });
 
-
-    // on each load get the next 6 images
-    for (var i = this.state.end; i < this.state.posts.length; i++) {
-      count++;
-    }
-  
-    console.log('count', count);
-    if (count < 6) {
-      // fetch more from the server
-      this.fetch(this.state.nextUrl);
-    } else {
-      setTimeout(() => {
-        this.setState({
-          end: this.state.end + 6,
-          isLoading: false
-        });
-      }, 1000);
-      
-    }
+    this.fetch(this.state.nextUrl);
   }
 }

@@ -24,7 +24,7 @@ export class ModalPost extends React.Component {
     }
 
     if (this.props.post.type === 'video') {
-      mediaNode = <Video
+      mediaNode = <Video controls
         poster={this.props.post.images.standard_resolution.url}
         src={this.props.post.videos.standard_resolution.url}
         onPlay={this.onPlay.bind(this)} />
@@ -36,6 +36,9 @@ export class ModalPost extends React.Component {
       classes.push('video');
     }
 
+    if (this.props.post.images.standard_resolution.height > this.props.post.images.standard_resolution.width) {
+      classes.push('height-100');
+    }
     return (
       <div className="modal-slide" onClick={this.props.onClick}>
         <div className="instabinge-pod-wrap inst-post">
