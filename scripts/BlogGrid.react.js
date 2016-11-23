@@ -56,6 +56,21 @@ export class BlogGrid extends React.Component {
       });
     }
 
+    if (this.state.isFinished) {
+      // add an extra tile to the grid
+      postNodes.push(
+        <div className="inst-post" key={this.state.posts.length + 1}>
+          <a className="inst-post-img instagram" href="http://www.instagram.com/adventuresinmotion" target="_blank" >
+            <img src={this.state.posts[this.state.posts.length - 1].images.thumbnail.url.replace('s150x150', 's320x320')} />
+            <div className="text-wrapper">
+              <span>To see more of my work</span>
+              <span className="link">www.instagram.com/adventuresinmotion</span>
+            </div>
+          </a>
+        </div>
+      );
+    }
+
     return (
       <div className="blog-grid">
         {postNodes}

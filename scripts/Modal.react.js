@@ -32,15 +32,13 @@ export class Modal extends React.Component {
     }).data('royalSlider');
 
     this.slider.ev.on('rsBeforeAnimStart', () => {
-      console.log('rsBeforeAnimStart');
       if (this.posts.length - 1 === this.slider.currSlideId) {
-        console.log(this.isFinished);
         if (!this.isFinished && !this.isLoading) {
           this.isLoading = true;
           this.props.onFetch((posts, isFinished) => {
+            this.isFinished = isFinished;
             this.add(posts);
             this.posts = this.posts.concat(posts);
-            this.isFinished = isFinished;
             this.isLoading = false;
           });
         }
@@ -75,6 +73,20 @@ export class Modal extends React.Component {
           post={post} />
       ));
     });
+    
+    if (this.isFinished) {
+      this.slider.appendSlide(ReactDOMServer.renderToString(
+        <div className="modal-slide" key={posts.length + 1}>
+          <a className="nstabinge-pod-wrap instagram" href="http://www.instagram.com/adventuresinmotion" target="_blank" >
+            <img src={posts[posts.length - 1].images.standard_resolution.url} />
+            <div className="text-wrapper">
+              <span>To see more of my work</span>
+              <span className="link">www.instagram.com/adventuresinmotion</span>
+            </div>
+          </a>
+        </div>
+      ));
+    }
   }
 
   render() {
@@ -84,6 +96,20 @@ export class Modal extends React.Component {
         post={post}
       />
     });
+
+    if (this.isFinished) {
+      postNodes.push(
+        <div className="modal-slide" key={this.posts.length + 1}>
+          <a className="instabinge-pod-wrap instagram" href="http://www.instagram.com/adventuresinmotion" target="_blank" >
+            <img src={this.posts[this.posts.length - 1].images.standard_resolution.url} />
+            <div className="text-wrapper">
+              <span>To see more of my work</span>
+              <span className="link">www.instagram.com/adventuresinmotion</span>
+            </div>
+          </a>
+        </div>
+      );
+    }
 
     return (
       <div className="modal modal-instabinge">

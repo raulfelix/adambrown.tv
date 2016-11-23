@@ -15,6 +15,7 @@ export class ModalPost extends React.Component {
     var
       locationNode,
       mediaNode,
+      playNode,
       classes = ['modal-view-image'];
 
     if (this.props.post.location) {
@@ -24,16 +25,20 @@ export class ModalPost extends React.Component {
     }
 
     if (this.props.post.type === 'video') {
+      classes.push('video');
+      
+      // when viewing video dont show triangle
+      if (this.state.isVideo) {
+        playNode = <div className="icon-play" onClick={() => { this.refs.vid.onPlay(); }}></div>
+      }
+
       mediaNode = <Video controls
+        ref="vid"
         poster={this.props.post.images.standard_resolution.url}
         src={this.props.post.videos.standard_resolution.url}
         onPlay={this.onPlay.bind(this)} />
     } else {
       mediaNode = <img src={this.props.post.images.standard_resolution.url} />
-    }
-
-    if (this.state.isVideo) {
-      classes.push('video');
     }
 
     if (this.props.post.images.standard_resolution.height > this.props.post.images.standard_resolution.width) {
@@ -44,6 +49,7 @@ export class ModalPost extends React.Component {
         <div className="instabinge-pod-wrap inst-post">
           <div className={classes.join(' ')}>
             {mediaNode}
+            {playNode}
           </div>
           <div className="modal-view-details">
             <div className="inst-wrap">
