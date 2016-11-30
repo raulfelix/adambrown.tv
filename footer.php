@@ -13,11 +13,11 @@
 				<span>© Adam Brown since 2004. All Rights Reserved.</span>
 			</div>
 			<div class="right">
-				<a href="http://fstopgear.com/staffpro/adam-brown" target="_blank">
+				<a href="http://fstopgear.com/" target="_blank" style="display: inline-block;vertical-align: middle;">
 					<img class="c-footer-logo" src="<?php echo bloginfo('template_directory'); ?>/images/f-stop-logo.png" />
 				</a>
-				<a href="http://www.expeditionmedia.co.uk/?s=12&id=366" target="_blank">
-					<img class="c-footer-logo" src="<?php echo bloginfo('template_directory'); ?>/images/expedition-logo.png" />
+				<a href="http://www.vinten.com" target="_blank" style="display: inline-block;vertical-align: middle;">
+					<img class="c-footer-logo" style="width: 92px;" src="<?php echo bloginfo('template_directory'); ?>/images/vinten-logo.png" />
 				</a>
 			</div>
 		</div><!-- end footer secondary-->		
